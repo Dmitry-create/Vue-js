@@ -8,6 +8,7 @@
 </template>
 
 <script>
+//import { mapMutations } from 'vuex'
 export default {
     name: 'PayDisplay',
     props:['show'],
@@ -19,6 +20,10 @@ export default {
       }
     },
     computed: {
+    //     ...mapMutations([
+    //   'setCostsList'
+    // ]),
+         
         getCurrentDate () {
             const today = new Date();
             const d = today.getDate()
@@ -34,12 +39,8 @@ export default {
                 value:this.value,
                 date:this.date||this.getCurrentDate,
             }
-            this.$emit('addNewItem',data)
+            this.$store.commit('addNewItems',data);
         }
-
     }
 }
 </script>
-<style>
-
-</style>

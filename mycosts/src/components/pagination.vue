@@ -49,7 +49,5 @@ export default {
 <style>
 .pag{
     text-align: center
-}
-
-
+};
 </style>

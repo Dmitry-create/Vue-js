@@ -9,7 +9,7 @@
       </tr>
     </table>
     <table class="table" 
-    v-for="(item,idx) in paylist"
+    v-for="(item,idx) in getCLT"
     v-bind:key="idx">
       <tr>
         <td class="td">{{idx+1}}</td>
@@ -25,11 +25,16 @@
 export default {
   name: 'Addlist',
   props:['paylist'],
+  computed: {
+    getCLT () {
+      return this.$store.getters.getCostsList
+    }
+  },
+
 }
 </script>
 <style>
  .td{
    width:100px;
  }
-
 </style>
