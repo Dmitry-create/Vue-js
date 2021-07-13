@@ -7,11 +7,18 @@ Vue.use(Vuex)
  
 export default new Vuex.Store({
     state: {
-        costsList:[]
+        costsList:[],
+        param:{
+          category:'',
+          value:'',
+        }
     },
     mutations: {
         setCostsList(state,payload){
             state.costsList=payload
+        },
+        setParam(state,payload){
+            state.param=payload
         },
         addNewItems(state, payload) {
             state.costsList.push(payload)
@@ -19,10 +26,11 @@ export default new Vuex.Store({
         
     },
     getters: {
-        getCostsList:state=>state.costsList
+        getCostsList:state=>state.costsList,
+        getParam:state=>state.param,
     },
     
-    action: {
+    actions: {
         fetchData ({commit}) {
             return new Promise((resolve) => {
                setTimeout(() => {
@@ -46,7 +54,7 @@ export default new Vuex.Store({
                }, 1000)
              })
             .then(res => {
-                commit('setCostsList', res)
+                commit('setCostsList',res)
             })
         }
     }    

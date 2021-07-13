@@ -3,15 +3,17 @@
    <button v-for="(item,idx) in paginator "
     v-bind:key="idx"
     @click="pagpayList(item)">{{item+1}}</button>
-   <table class="table" 
-    v-for="(item,id) in newList"
-    v-bind:key="id">
-      <tr>
-        <td class="td">{{item.date}}</td>
-        <td class="td">{{item.value}}</td>
-        <td class="td">{{item.category}}</td>
-      </tr>
-    </table>
+    <div>
+    <table class="table" 
+        v-for="(item,idx) in newList"
+        v-bind:key="idx">
+        <tr>
+            <td class="td">{{item.date}}</td>
+            <td class="td">{{item.value}}</td>
+            <td class="td">{{item.category}}</td>
+        </tr>
+        </table>
+    </div>
   </div>
 </template>
 

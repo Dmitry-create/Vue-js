@@ -1,9 +1,10 @@
 <template>
   <div class="#" v-show="show">
-    <input type="text" placeholder="category"  v-model="category"/>
+    <input type="text" placeholder="category"  v-model="getPar.category"/>
     <input placeholder="date" type="date" v-model="date"/>
-    <input placeholder="value" type="number" v-model="value"/>
+    <input placeholder="value" type="number" v-model="getPar.value"/>
     <button @click="addCosts">ADD</button>
+    <span v-show="message">{{'заполните все поля'}}</span>
   </div>
 </template>
 
@@ -14,15 +15,19 @@ export default {
     props:['show'],
     data(){
         return{
-            category:'',
+            //category:'',
             date:'',
-            value:'',
+            //value:'',
+            message:false
       }
     },
     computed: {
     //     ...mapMutations([
     //   'setCostsList'
     // ]),
+        getPar () {
+            return this.$store.getters.getParam
+        },
          
         getCurrentDate () {
             const today = new Date();
@@ -34,12 +39,17 @@ export default {
     },
     methods:{
         addCosts(){
+            if(this.getPar.category && this.getPar.value ){
+                this.message=false
             const data={
-                category:this.category,
-                value:this.value,
+                category:this.getPar.category,
+                value:this.getPar.value,
                 date:this.date||this.getCurrentDate,
             }
             this.$store.commit('addNewItems',data);
+            }else{
+                this.message=true
+            }
         }
     }
 }

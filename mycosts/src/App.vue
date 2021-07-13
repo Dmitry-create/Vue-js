@@ -1,9 +1,20 @@
 <template>
   <div id="app">
+  <ul>
+    <li><a href="#" @click="goToPage('food200','food',200)">food</a></li>
+    <li><a href="#" @click="goToPage('transport50','transport',50)">Transport</a></li>
+    <li><a href="#" @click="goToPage('entertainment2000','entertainment',2000)">entertainment</a></li>
+  </ul>
+  <div>
+    <router-view/>
+  </div>
+  
     <button id="btn" @click="show=!show">add new cost</button>
+    <pagination :paylist="getCLT" />
     <PayDisplay  :show="show"/>
     <Addlist :paylist="getCLT" />
-    <pagination :paylist="getCLT" />
+    
+    
   </div>
 </template>
 
@@ -11,22 +22,45 @@
 import Addlist from './components/Addlist.vue'
 import PayDisplay from './components/PayDisplay.vue'
 import pagination from './components/pagination.vue'
-import { mapMutations } from 'vuex'
+// import entertainment2000 from './pages/entertainment2000.vue'
+// import food200 from './pages/food200.vue'
+// import transport50 from './pages/transport50.vue'
+
+import { mapMutations,mapActions } from 'vuex'
 export default {
   name: 'App',
   components: {
-    Addlist,PayDisplay,pagination
+    Addlist,
+    PayDisplay,
+    pagination,
+    // entertainment2000,
+    // food200,
+    // transport50
   },
   data(){
     return{
-      //costsList:[],
       show:true,
     }
   },
   methods:{
+    ...mapActions({
+      fetchListData:'fetchData'
+    }),
     ...mapMutations([
       'setCostsList'
     ]),
+     goToPage(page,category,value){
+        this.$router.push({
+          name: page,
+          params: {
+            id:{
+              category:category,
+              value:value,
+            },
+
+          }
+        })
+      },
     // fetchData(){
     //   return[
     //     {
@@ -53,11 +87,16 @@ export default {
   computed: {
     getCLT () {
       return this.$store.getters.getCostsList
-    }
+    },
+    getPar () {
+      return this.$store.getters.getParam
+    },
+
+
+  },
+  created(){
+    this.fetchListData()
   }
-  // created(){
-  //    this.setCostsList(this.fetchData())
-  // }
 }
 </script>
 
