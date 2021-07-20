@@ -7,40 +7,22 @@
   </ul>
   <div>
     <router-view/>
-  </div>
-  
-    <button id="btn" @click="show=!show">add new cost</button>
-    <pagination :paylist="getCLT" />
-    <PayDisplay  :show="show"/>
-    <Addlist :paylist="getCLT" />
-    
-    
+  </div> 
+    <pagination :paylist="getCLT" />  
+    <Addlist :paylist="getCLT" /> 
   </div>
 </template>
 
 <script>
-import Addlist from './components/Addlist.vue'
-import PayDisplay from './components/PayDisplay.vue'
-import pagination from './components/pagination.vue'
-// import entertainment2000 from './pages/entertainment2000.vue'
-// import food200 from './pages/food200.vue'
-// import transport50 from './pages/transport50.vue'
-
+//import Addlist from './components/Addlist.vue'
+//import PayDisplay from './components/PayDisplay.vue'
+//import pagination from './components/pagination.vue'
 import { mapMutations,mapActions } from 'vuex'
 export default {
   name: 'App',
   components: {
-    Addlist,
-    PayDisplay,
-    pagination,
-    // entertainment2000,
-    // food200,
-    // transport50
-  },
-  data(){
-    return{
-      show:true,
-    }
+    Addlist:()=>import('./components/Addlist.vue'),
+    pagination:()=>import('./components/pagination.vue')
   },
   methods:{
     ...mapActions({
@@ -57,32 +39,9 @@ export default {
               category:category,
               value:value,
             },
-
           }
         })
       },
-    // fetchData(){
-    //   return[
-    //     {
-    //       date: '20.07.2020',
-    //       category: 'Food',
-    //       value: 169,
-    //     },
-    //     {
-    //       date: '28.03.2020',
-    //       category: 'Sport',
-    //       value: 12,
-    //     },
-    //     {
-    //       date: '16.09.2020',
-    //       category: 'TV',
-    //       value: 300,
-    //     }
-    //   ]
-     //},
-    // addNewItem(data){
-    //   this.costsList=[...this.costsList,data]
-    // }
   },
   computed: {
     getCLT () {
@@ -91,8 +50,6 @@ export default {
     getPar () {
       return this.$store.getters.getParam
     },
-
-
   },
   created(){
     this.fetchListData()

@@ -22,6 +22,15 @@ export default new Vuex.Store({
         },
         addNewItems(state, payload) {
             state.costsList.push(payload)
+        },
+
+        deIitems(state, payload) {
+          console.log(payload)
+            state.costsList.splice(payload.idx,payload.count)
+        },
+        changeitems(state, payload){ 
+            state.costsList.splice(payload.idx,payload.count,payload.data)
+            console.log(state.costsList)
         }
         
     },
@@ -39,6 +48,7 @@ export default new Vuex.Store({
                      date: '28.03.2020',
                      category: 'Food',
                      value: 169,
+                     
                    },
                    {
                      date: '24.03.2020',

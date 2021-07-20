@@ -1,12 +1,14 @@
 <template>
   <div class="pag">
    <button v-for="(item,idx) in paginator "
-    v-bind:key="idx"
+    v-bind:key="idx" 
+    v-bind:item="item"
     @click="pagpayList(item)">{{item+1}}</button>
     <div>
     <table class="table" 
         v-for="(item,idx) in newList"
-        v-bind:key="idx">
+        v-bind:key="idx" 
+        >
         <tr>
             <td class="td">{{item.date}}</td>
             <td class="td">{{item.value}}</td>
@@ -24,7 +26,9 @@ export default {
     
     data(){
         return{
-            newList:[]
+            newList:[],
+            item:null
+
         }
     },
     methods:{
@@ -44,7 +48,11 @@ export default {
           return Array.apply(null, {length: this.pagLength}).map(Number.call, Number)
            
         }
-    }
+
+    },
+//    created(){
+//         this.pagpayList(this.item)
+//     }
     
 }
 </script>
